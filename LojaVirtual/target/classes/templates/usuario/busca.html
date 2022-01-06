@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+
+<head>
+	<title>Buscar Usuários</title>
+	
+	<link rel="stylesheet" href="/css/busca.css">
+</head>
+
+<body >
+	
+	<section layout:fragment="corpo">
+		<div class=container id="containeer">
+		<div id="box">
+			<h1>Buscar Usuários</h1>
+			<div id="pesquisar">
+				<form th:action="@{/usuarios/buscar}" method="get">
+
+					<input type="text" th:name="nome" placeholder="Nome"/>
+					<input class ="button" type="submit" value="Buscar" />
+					<input class ="button" type="submit" value=Cancelar formaction="/" formmethod="get" />
+
+				</form>
+			</div>
+		</div>
+		
+		<div th:replace="fragments/mensagens"></div>
+		
+			<div id="resultados">
+				<div class="lista" th:if="${ usuariosEncontrados} != null">
+		
+					<table class="table">
+
+						<thead>
+						  <tr>
+							<th scope="col">PERFIL </th>
+							<th scope="col">NOME</th>
+							<th scope="col">EMAIL</th>
+							
+						  </tr>
+						</thead>
+
+						<tbody>
+						  <tr th:each="u : ${usuariosEncontrados}">
+						  	<td> 
+								<img th:if="${u.foto != null}" 
+										th:src="@{/download/} + ${u.foto.id} + '?salvar=false'"
+										style="max-height: 120px;" />
+										
+							</td>
+							<td th:text="${u.nome}"></td>
+							<td th:text="${u.email}"></td>
+							
+							<td class="opcao">
+								<a class="btn btn-outline-secondary" th:href="'/usuarios/editar/' + ${u.id}" role="button">Editar</a>
+								<a class="btn btn-outline-danger" th:href="'/usuarios/remover/' + ${u.id}" role="button" onclick="if (!confirm('Deseja realemnte remover o usuário?')) return false;">
+										Remover </a>
+							</td>
+						  </tr>
+						  
+						</tbody>
+					  </table>
+				</div>
+			</div>
+		
+	</div>
+	</section>
+	<script>
+
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+		integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+		crossorigin="anonymous"></script>
+	<script src="/bootstrap/bootstrap.min.js"></script>
+</body>
+
+</html>

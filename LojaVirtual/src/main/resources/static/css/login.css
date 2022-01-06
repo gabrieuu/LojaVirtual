@@ -1,0 +1,130 @@
+@charset "utf-8";
+*{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.container{
+	height: 100vh;
+	width: 100vw;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+#box{
+	background-color:#eedece;
+	min-width: 200px;
+	width: 300px;
+	max-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 20px;
+	box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.mensagem{
+	font-size: 12px;
+	margin-bottom: 5px;
+}
+#form{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+#conteudo{
+	width: 200px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+}
+
+.texto{
+	width: 224px;
+}
+.caixaTexto{
+	margin-bottom:10px;
+	border-bottom:1px solid rgba(0,0,0,0.3);
+	width: 100%;
+	padding: 3px;
+	outline: none;
+	background: none;	
+}
+.caixaTexto:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #eedece inset !important;
+}
+
+.botao{
+	width: 100%;
+	margin-top: 10px;
+	font-size: 13px;
+	padding: 9px;
+	border-radius: 10px;
+	cursor: pointer;
+	border: 1px solid #30384c;
+	color:#30384c;
+	font-weight: 5px;
+	transition: 0.5s;
+}
+.botao:hover{
+	color: white;
+	background-color: #30384c;
+}
+#entrar{
+	display: flex;
+	justify-content: center;
+	margin-top: 1.4rem;
+	margin-bottom: 10px;
+}
+#contas{
+	width: 80%;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+#links{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+div#contas p#entrar{
+	font-size: 12px;
+	color: rgba(0,0,0,0.9);
+}
+
+.social{
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.account{
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:0.5s;
+	text-decoration: none;
+	color:#30384c;
+}
+.account:hover{
+	color:#fb5135;
+}
+.fa-facebook-square{
+	font-size: 25px;
+}
+.fa-google{
+	font-size: 25px;
+}

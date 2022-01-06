@@ -1,0 +1,15 @@
+<div class="mensagem text-success" th:if="${msgSucesso} != null">
+		<b th:text="${msgSucesso}" >
+</div>
+
+<div class="mensagem text-danger" th:if="${msgErro} != null">
+		<b th:text="${msgErro}">
+</div>
+
+<div th:if="${msgsErro} != null">
+		<ul>
+			<li th:each=" m : ${msgsErro}">
+				<b th:text = "${m}"class="mensagem text-danger"></b>
+			</li>
+		</ul>
+</div>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="utf-8">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/bootstrap/bootstrap.min.css" rel="stylesheet">
+	
+	<script src="https://kit.fontawesome.com/59f3c24bb5.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+			<nav class="navbar navbar-light" style="background: #30384c;">
+		
+				<div class="container">
+		
+					<a class="navbar-brand" th:href="@{'/'}" style="color:#fb5135;">
+						<img alt="" src="">
+						Loja
+					</a>
+		
+					<div class=buscar-box>
+		
+						<input class="busca-txt" th:name="nome" type="search" placeholder="Busca...">
+						<a href="#" class="busca-btn">
+							<i class="fas fa-search"></i>
+		
+						</a>
+					</div>
+					<a id="menu" class="lg-bc btn" data-bs-toggle="collapse" href="#collapseExample" role="button"
+						aria-expanded="false" aria-controls="collapseExample">
+						<i class="fas fa-bars" style="color:#fff;"></i>
+					</a>
+		
+				</div>
+				<div class="collapse cadastros" id="collapseExample">
+		
+					<div class="opcoes">
+						<a class="lg-bc" href="/usuarios/cadastro">
+							<i class="far fa-user-circle"></i>
+							Cadastro usuario
+						</a>
+						<a class="lg-bc" href="/usuarios/buscar">
+							<i class="far fa-user-circle"></i>
+							Buscar usuarios
+						</a>
+						<!--
+						<a class="lg-bc" href="/produtos/cadastro">
+							<i class="fal fa-shopping-cart"></i>
+							Cadastro produto
+						</a>
+						<a class="lg-bc" href="/produtos/busca">
+							<i class="fal fa-shopping-cart"></i>
+							Buscar produtos
+						</a>
+						-->
+					</div>
+				</div>
+				
+				<form th:action="@{logout}" method="post">
+					<input type="submit" value="Sair"><br/>
+				</form>
+				
+			</nav>
+			
+		
+		
+		<div>
+		
+				<section layout:fragment="corpo">
+					
+				</section>
+		
+		</div>
+		
+		
+		
+		<div id="footer">
+		  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+		    <div class="col-md-4 d-flex align-items-center">
+		      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+		        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+		      </a>
+		      <span class="text-muted">&copy; 2021 Company, Inc</span>
+		    </div>
+		
+		    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+		      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+		      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+		      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+		    </ul>
+		  </footer>
+		</div>
+		
+	<!--bootstrap-->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+		integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+		crossorigin="anonymous"></script>
+	<script src="/bootstrap/bootstrap.min.js"></script>
+</body>
+
+</html>

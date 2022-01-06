@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+	
+	<title>Cadastro de Usuário</title>
+	
+	<link href="/css/cadastro.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<script >
+		
+		$(function (){
+			$("#estado").autocomplete({
+				source: "/usuarios/autocompleteEstados",
+				minLength: 1, 
+				select: function (event, ui){
+					this.value = ui.item.label;
+					$("#idEstado").val(ui.item.value);
+					return false;
+				}
+			});
+		});
+		
+	</script>
+	
+</head>
+
+<body style="background: #30384c;">
+	
+	<section layout:fragment="corpo">
+		<div class="container">
+		
+		<div id="box">
+				
+			<div th:replace="fragments/mensagens"></div>
+				
+			<div id="conteudo">
+				<h4>Cadastro</h4>
+				<form th:action="@{/usuarios/salvar}" th:object="${usuario}"
+					method="post" enctype="multipart/form-data" id="form">
+
+					<input type="hidden" th:field="${usuario.id}" /> 
+					
+					<input class="caixaTexto" type="text" placeholder="Nome:"
+					th:field="${usuario.nome}" /> 
+					
+					<input class="caixaTexto" id="estado" placeholder="Estado:" th:field="${usuario.estado.nome}">
+					<input id="idEstado" type="hidden"
+						th:field="${usuario.estado.id}">
+					
+					<input class="caixaTexto" type="text" placeholder="Email:"
+					th:field="${usuario.email}" /> 
+					
+					<input type="file"  th:name="file" />
+					<input type="hidden" th:field="${usuario.foto.id}"/>
+					
+					<input class="caixaTexto" type="password" placeholder="Senha:"
+					th:field="${usuario.senha}" /> 
+
+					<input class="botao" type="submit" value="Cadastrar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+					<input class="botao" type="submit" value="Cancelar" formaction="/" formmethod="get" />
+				</form>
+				<div id="contas">
+					<p id="entrar">entrar com</p>
+
+					<div id="links">
+
+						<a href="#" class="account"> <i class="fab fa-facebook-square"></i>
+						</a> <a href="#" class="account"> <i class="fab fa-google"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</section>
+	
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+		integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+		integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+		crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

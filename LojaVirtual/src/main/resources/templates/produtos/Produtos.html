@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+<head>
+
+    <meta charset="utf-8">
+    <title>Cadastrar Produto</title>
+    <link href="/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cadProd.css">
+</head>
+
+<body>
+
+    <div class="login-form">
+        <div class="container">
+            <div class="form">
+            <h1>Produtos</h1>
+            
+			<div class="mensagem text-success" th:if="${msgSucesso} != null">
+				<b th:text="${msgSucesso}"></b>	
+			</div>
+			<div class="mensagem text-danger" th:if="${msgErro} != null">
+				<b th:text="${msgErro}"></b>
+			</div>
+
+            <div class="erro-msg" data-bs-toggle="modal" data-bs-target="#exampleModal" th:if="${msgsErro} != null">
+               <div>
+                Houve
+                 <span th:text="${tamanho}"></span>            
+                erros
+                </div>               
+            </div>
+
+                <form th:action="@{/produtos/salvar}" th:object="${produto}" method="post">
+                    
+                    <input type="hidden" th:field="${produto.id}">
+
+                    Nome Produto:
+                    <input type="text" class="form-control" th:field="${produto.nome}">
+
+					<div id="cat">
+                        Categoria:
+                        <select th:field="${produto.categoria}">
+                            <option value="">selecione...</option>
+                            <option th:each="p : ${categoria}" th:text="${p}" th:value="${p}"></option>
+                        </select>
+                    </div>
+
+                    Preco - R$:
+                    <input type="text" class="form-control" th:field="${produto.preco}">
+					
+					 Marca:
+                    <input type="text" class="form-control" th:field="${produto.marca}">
+                    
+                    Descrição:
+                    <input type="text" class="form-control" th:field="${produto.descricao}">
+					
+					<div id="divBot">
+                    <a class="link" href="#">Esqueceu a senha?</a>
+                    
+                    <input type="submit" class="log-btn" value="cadastrar">
+                    
+                    <input type="submit" class="log-btn" value="cancelar" formaction="/" formmethod="get"
+                    style="margin-top: 5px;"> 
+                </div>
+                
+                </form>
+
+            </div>
+        </div>
+        <div class="secao">
+
+            <div id="largura">
+
+                <div class="image">       
+                  <img src="/imagens/image.png" alt="selecione uma imagem" id="img">
+                    
+               </div>
+
+            </div>
+
+            <input type="file" id="fiImg" name="fiImg" accept="image/*">
+        
+        </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li th:each=" m : ${msgsErro}">
+                    <b th:text = "${m}"class="mensagem text-danger"></b>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
