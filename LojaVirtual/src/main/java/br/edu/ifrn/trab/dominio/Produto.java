@@ -1,14 +1,30 @@
 package br.edu.ifrn.trab.dominio;
-
+/*
+ * essa é a classe de dominio de produto e tem uma correspondente no banco de dados
+ * 
+ * @author Nellyson Felipe (nellysonfelipe@gmail.com)
+ * 
+ * Data de criação 22/09/2021
+ * */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/*
+ * @param entidade Produto
+ * */
 @Entity
 public class Produto {
-	
+	/*
+	 * informações do produto
+	 * 
+	 * códigos como hashcode e equals
+	 * 
+	 * codigos de get e set das informações
+	 * 
+	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

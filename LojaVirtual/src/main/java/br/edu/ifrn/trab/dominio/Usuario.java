@@ -1,5 +1,11 @@
 package br.edu.ifrn.trab.dominio;
-
+/*
+ * essa é a classe de dominio de Usuario e tem uma correspondente no banco de dados
+ * 
+ * @author Nellyson Felipe (nellysonfelipe@gmail.com)
+ * 
+ * Data de criação 22/09/2021
+ * */
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +16,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+/*
+ * @param entidade Usuario
+ * */
 @Entity
 public class Usuario {
-	
+	/*
+	 * informações do usuario
+	 * 
+	 * códigos como hashcode e equals
+	 * 
+	 * codigos de get e set das informações
+	 * 
+	 * */
 	public static final String ADMIN="ADMIN";
 	public static final String USUARIO_COMUM = "COMUM";
 			

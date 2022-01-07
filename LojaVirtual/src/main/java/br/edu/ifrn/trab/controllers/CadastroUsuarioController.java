@@ -1,3 +1,15 @@
+/*
+ * 
+ * Objetivo:Essa classe tem como objetico implemtentar as
+ * funcionalidades de cadastrar e editar de um usuario.
+ * 
+ * @author Gabriel Barbosas da Silva (barbosa.silva@escolar.ifrn.edu.br)
+ * 
+ * Data de criação: 20 de setembro 2021
+ * 
+ * 
+ * */
+
 package br.edu.ifrn.trab.controllers;
 
 import java.io.IOException;
@@ -29,34 +41,48 @@ import br.edu.ifrn.trab.repositorio.EstadoRepository;
 import br.edu.ifrn.trab.repositorio.UsuarioRepositorio;
 
 
+
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/usuarios") //executa a classe
 public class CadastroUsuarioController {
 	
+	//usuarioRep: repositorio do Banco de dados de usuario
 	@Autowired
 	private UsuarioRepositorio usuarioRep;
 	
+	//estadoRepository: repositorio do Banco de dados de estado
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
+	//arquivoRepository: repositorio do Banco de dados de arquivo
 	@Autowired
 	private ArquivoRepository arquivoRepository;
 	
+	
 	@GetMapping("/cadastro")
+	/* Metodo para entrar na pagina de cadastro
+	 * @return String -  pagina html do cadastro
+	 * */
 	public String entrar(ModelMap model) {
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/cadastro";
+		
 	}
 
 	
 	@PostMapping("/salvar")
 	@Transactional(readOnly = false)
+	/*
+	 * metodo responsável por salvar um usuario
+	 * @return String retorna a pagina de cadastro após adicionar o usuário
+	 * */
 	public String salvar(Usuario usuario, RedirectAttributes attr, BindingResult result,  
 			@RequestParam("file") MultipartFile arquivo,
 			 HttpSession sessao, ModelMap model) {
 		
-		List<String> validar = validarDados(usuario);
-		if(!validar.isEmpty()){
+		List<String> validar = validarDados(usuario);//valida os campos que o usuario vai digitar
+		
+		if(!validar.isEmpty()){//se a variavel validar conter algum texto, o software ira disparar uma mensagem
 			model.addAttribute("msgsErro", validar);
 			return "usuario/cadastro";
 		}
@@ -106,6 +132,10 @@ public class CadastroUsuarioController {
 	
 	@Transactional(readOnly = true)
 	@GetMapping("/editar/{id}")
+	/*
+	 * metodo para editar um usuario
+	 * @return String - retorna a pagina de cadastro após a edição ter terminado
+	 * */
 	public String iniciarEdicao(@PathVariable("id") Integer idUsuario, ModelMap model, HttpSession sessao) {
 
 		Usuario u = usuarioRep.findById(idUsuario).get();
@@ -118,6 +148,10 @@ public class CadastroUsuarioController {
 	@GetMapping("/autocompleteEstados")
 	@Transactional(readOnly = true)
 	@ResponseBody
+	/*
+	 * auto completar para estados
+	 * @return List - retorna uma lista de estados
+	 * */
 	public List<br.edu.ifrn.trab.dto.AutocompleteDTO> autocompleteProfissoes(
 			@RequestParam("term") String termo){
 		
@@ -133,7 +167,10 @@ public class CadastroUsuarioController {
 	}
 	
 	
-	
+	/*
+	 * metodo para validar os campos do cadastro
+	 * @return List - retorna uma lisra de Strings contendo os erros do formulario.
+	 * */
 	private List<String> validarDados(Usuario usuario){
 		List<String> msg = new ArrayList<>();
 

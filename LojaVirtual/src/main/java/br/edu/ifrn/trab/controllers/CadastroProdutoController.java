@@ -1,3 +1,11 @@
+/*
+ * Objetivo: Está classe tem o objetivo de cadastrar e editar produto.
+ * 
+ * @author Nellyson Felipe (nellysonfelipe@gmail.com)
+ * 
+ * data de criação 22/09/2021
+ */
+
 package br.edu.ifrn.trab.controllers;
 
 import java.util.ArrayList;
@@ -20,10 +28,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifrn.trab.dominio.Produto;
 import br.edu.ifrn.trab.repositorio.ProdutoRepositorio;
 
+/*
+ * url responde a anotação de controle da página 
+ */
 @Controller
 @RequestMapping("/produtos")
 public class CadastroProdutoController {
 	
+	//Repositorio de produto
 	@Autowired
 	private ProdutoRepositorio prodRep;
 	
@@ -34,10 +46,16 @@ public class CadastroProdutoController {
 		return "produtos/Produtos";
 	}
 	
-	
+	/*
+	 * url responde a o metodo salvar produto
+	 */
 	@PostMapping("/salvar")
 	public String salvar(Produto produto, RedirectAttributes attr, HttpSession sessao, ModelMap model) {
-
+		
+		/*
+		 * @param validar String  - recebe os dados de validação de produto
+		 * @return retorna a url da pagina com a mensagem de erro
+		 */
 		List<String> validar = validarDados(produto);
 		String cont = validar.size()+"";
 		if(!validar.isEmpty()){
@@ -45,25 +63,38 @@ public class CadastroProdutoController {
 			model.addAttribute("tamanho",cont);
 			return "produtos/Produtos";
 		}
+		/*
+		 * caso esteja tudo certo com as informações o repositório salva e envia a mensagem de sucesso
+		 * @return redire  ciona a pagina de cadastro
+		 */
 			prodRep.save(produto);
 			attr.addFlashAttribute("msgSucesso","Operação realizada com sucesso!");
 		return "redirect:/produtos/cadastro";
 	}
 	
+	/*
+	 * url responde a o metodo editar produto
+	 * @param a url recebe um id de produto
+	 */
 	@Transactional(readOnly = true)
 	@GetMapping("/editar/{id}")
 	public String iniciarEdicao(
 			@PathVariable("id") Integer idProduto,
 			ModelMap model, HttpSession sessao
 			) {
-		
+		/*
+		 * @param u Produto - recebe uma lista de produtos pelo id
+		 * @return se encontrar um produto referente ao id recebido retorna a pagina cadastro que fica resposanvel pela edição.
+		 */
 		Produto u = prodRep.findById(idProduto).get();
 		
 		model.addAttribute("produto", u);
 		
 		return "produtos/Produtos";
 	}
-	
+	/*
+	 * @return retorna uma lista de categoria que o usuário seleciona na hora de cadastrar produto
+	 */
 	@ModelAttribute("categoria")
 	public List<String> getCategoria(){
 		return Arrays.asList("Vestuário", "Calçados", "Artigos Esportivos", "Decoração", "Informática","SmartPhones", "Outros");
@@ -89,20 +120,3 @@ public class CadastroProdutoController {
 		return msg;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
